@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>My Certificates - Kinan Assaf</title>
+    <style>
+        /* ── reset & base ── */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 30px 15px;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        /* ── header ── */
+        .header {
+            text-align: center;
+            padding: 30px 20px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+        .header h1 {
+            color: #1a3a5c;
+            font-size: 38px;
+            font-weight: 700;
+        }
+        .header h1 span {
+            color: #1a73e8;
+        }
+        .header p {
+            color: #666;
+            font-size: 18px;
+            margin-top: 8px;
+        }
+
+        /* ── quick jump links ── */
+        .quick-links {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        .quick-links a {
+            background: #e8f0fe;
+            color: #1a73e8;
+            padding: 6px 16px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            transition: background 0.3s;
+        }
+        .quick-links a:hover {
+            background: #1a73e8;
+            color: #fff;
+        }
+
+        /* ── certificate card ── */
+        .cert {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            padding: 30px;
+            margin-bottom: 30px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            scroll-margin-top: 20px;
+        }
+        .cert:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+        }
+        .cert:target {
+            animation: highlight 1.5s ease;
+            border: 3px solid #1a73e8;
+        }
+        @keyframes highlight {
+            0% { background: #e8f0fe; }
+            100% { background: white; }
+        }
+
+        .cert-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-bottom: 10px;
+            border-bottom: 2px solid #f0f4f8;
+            padding-bottom: 12px;
+        }
+        .cert-header h2 {
+            color: #1a3a5c;
+            font-size: 20px;
+            font-weight: 600;
+        }
+        .cert-header .badge {
+            background: #1a73e8;
+            color: white;
+            padding: 5px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        .cert .date {
+            color: #666;
+            font-size: 15px;
+            margin: 8px 0 12px 0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        .cert .date .icon {
+            font-size: 18px;
+        }
+        .cert .date span {
+            background: #e8f0fe;
+            padding: 3px 14px;
+            border-radius: 20px;
+            color: #1a73e8;
+            font-weight: 600;
+        }
+        .cert .hash-link {
+            color: #1a73e8;
+            font-size: 13px;
+            text-decoration: none;
+            background: #f0f4f8;
+            padding: 2px 12px;
+            border-radius: 12px;
+            font-weight: 500;
+        }
+        .cert .hash-link:hover {
+            background: #1a73e8;
+            color: #fff;
+        }
+
+        /* ── description ── */
+        .description {
+            background: #f8f9fa;
+            padding: 14px 18px;
+            border-radius: 10px;
+            margin: 10px 0 15px 0;
+            border-left: 4px solid #1a73e8;
+            color: #444;
+            font-size: 15px;
+            line-height: 1.7;
+        }
+        .description strong {
+            color: #1a3a5c;
+        }
+        .description ul {
+            margin: 8px 0 0 20px;
+            padding-left: 0;
+            list-style: none;
+        }
+        .description ul li {
+            position: relative;
+            padding-left: 20px;
+            margin-bottom: 4px;
+        }
+        .description ul li::before {
+            content: "•";
+            color: #1a73e8;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+
+        /* ── PDF embed & download ── */
+        .cert embed {
+            width: 100%;
+            height: 500px;
+            border: 1px solid #e0e0e0;
+            border-radius: 12px;
+            margin-top: 5px;
+        }
+        .cert .download-btn {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 12px 30px;
+            background: #1a73e8;
+            color: #fff !important;
+            text-decoration: none;
+            font-weight: 600;
+            border-radius: 30px;
+            transition: background 0.3s ease;
+            font-size: 15px;
+        }
+        .cert .download-btn:hover {
+            background: #1557b0;
+        }
+
+        .footer {
+            text-align: center;
+            color: #888;
+            font-size: 14px;
+            margin-top: 30px;
+            padding: 20px;
+        }
+
+        /* ── responsive ── */
+        @media (max-width: 600px) {
+            .header h1 { font-size: 26px; }
+            .cert-header h2 { font-size: 16px; }
+            .cert embed { height: 300px; }
+            .cert { padding: 20px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+
+        <!-- ===== HEADER ===== -->
+        <div class="header">
+            <h1>📜 <span>Kinan Assaf</span> — Certificates</h1>
+            <p>Achievements &amp; Recognitions</p>
+            <div class="quick-links">
+                <a href="#aspnet">🚀 ASP.NET Core</a>
+                <a href="#icpc2025-place">🥉 ICPC 2025 · Place</a>
+                <a href="#icpc2025-cert">📜 ICPC 2025 · Cert</a>
+                <a href="#icpc2024">🏅 ICPC 2024</a>
+            </div>
+        </div>
+
+        <!-- ========================================================= -->
+        <!-- 1. ASP.NET Core  (newest: 2026-08-07)                    -->
+        <!-- ========================================================= -->
+        <div class="cert" id="aspnet">
+            <div class="cert-header">
+                <h2>🚀 Mastering ASP.NET Core: Concepts to Production‑Ready APIs</h2>
+                <span class="badge">⭐ Completion</span>
+            </div>
+            <div class="date">
+                <span class="icon">📅</span> Date: <span>2026-08-07</span>
+                <a href="#aspnet" class="hash-link"># direct link</a>
+            </div>
+            <div class="description">
+                <strong>📘 Description:</strong> Completed an intensive program on building production‑ready RESTful APIs with ASP.NET Core. Gained hands‑on experience in Clean Architecture, SOLID principles, Dependency Injection, Entity Framework Core, SQL Server, JWT authentication, Serilog logging, caching, Unit &amp; Integration Testing, and Docker containerization. Enhanced skills in developing secure, scalable, and maintainable enterprise backend systems.
+            </div>
+            <embed src="certificate-of-completion-for-mastering-asp-net-core-concepts-to-production-ready-apis.pdf" type="application/pdf">
+            <br>
+            <a href="certificate-of-completion-for-mastering-asp-net-core-concepts-to-production-ready-apis.pdf" download class="download-btn">📥 Download Certificate</a>
+        </div>
+
+        <!-- ========================================================= -->
+        <!-- 2. ICPC 2025 – Twelfth Place  (2025-08-16)               -->
+        <!-- ========================================================= -->
+        <div class="cert" id="icpc2025-place">
+            <div class="cert-header">
+                <h2>🏆 ICPC Syrian Virtual University Contest 2025</h2>
+                <span class="badge">🥉 Twelfth Place</span>
+            </div>
+            <div class="date">
+                <span class="icon">📅</span> Date: <span>2025-08-16</span>
+                <a href="#icpc2025-place" class="hash-link"># direct link</a>
+            </div>
+            <div class="description">
+                <strong>📘 Description:</strong> ICPC National Contest – Team Leader. Led a competitive programming team in the International Collegiate Programming Contest (ICPC) national competition. Responsibilities included: coordinating team strategy and problem‑solving approaches; delegating tasks based on each member's strengths (algorithms, data structures, implementation); managing time pressure and optimizing solution delivery; achieving <strong>11th rank among 32 teams</strong> in the region. Skills demonstrated: Leadership, teamwork, algorithmic thinking, C++, problem‑solving under pressure.
+            </div>
+            <embed src="2026-ICPC%20Syrian%20Virtual%20UC-PLACE.pdf" type="application/pdf">
+            <br>
+            <a href="2026-ICPC%20Syrian%20Virtual%20UC-PLACE.pdf" download class="download-btn">📥 Download Certificate</a>
+        </div>
+
+        <!-- ========================================================= -->
+        <!-- 3. ICPC 2025 – Certificate of Achievement  (2025-08-16)  -->
+        <!-- ========================================================= -->
+        <div class="cert" id="icpc2025-cert">
+            <div class="cert-header">
+                <h2>🏆 ICPC Syrian Virtual University Contest 2025</h2>
+                <span class="badge">📜 Certificate of Achievement</span>
+            </div>
+            <div class="date">
+                <span class="icon">📅</span> Date: <span>2025-08-16</span>
+                <a href="#icpc2025-cert" class="hash-link"># direct link</a>
+            </div>
+            <div class="description">
+                <strong>📘 Description:</strong> ICPC Competitive Programming Award. Received from ICPC for competing in the International Collegiate Programming Contest – strengthening skills in algorithms, data structures, and team‑based problem‑solving.
+            </div>
+            <embed src="2026-ICPC%20Syrian%20Virtual%20UC-kinan%20Assaf-PLACE.pdf" type="application/pdf">
+            <br>
+            <a href="2026-ICPC%20Syrian%20Virtual%20UC-kinan%20Assaf-PLACE.pdf" download class="download-btn">📥 Download Certificate</a>
+        </div>
+
+        <!-- ========================================================= -->
+        <!-- 4. ICPC 2024 – Honorable Mention  (oldest: 2024-07-08)   -->
+        <!-- ========================================================= -->
+        <div class="cert" id="icpc2024">
+            <div class="cert-header">
+                <h2>🏆 ICPC Syrian Virtual University Contest 2024</h2>
+                <span class="badge">🏅 Honorable Mention</span>
+            </div>
+            <div class="date">
+                <span class="icon">📅</span> Date: <span>2024-07-08</span>
+                <a href="#icpc2024" class="hash-link"># direct link</a>
+            </div>
+            <div class="description">
+                <strong>📘 Description:</strong> ICPC Certificate of Honor. Honored for outstanding performance as part of my university's competitive programming team in the ICPC regional contest. Demonstrated excellence in algorithmic problem‑solving, teamwork, and time management.
+            </div>
+            <embed src="2025-ICPC%20Syrian%20Virtual%20UC-kinan%20Assaf-PLACE.pdf" type="application/pdf">
+            <br>
+            <a href="2025-ICPC%20Syrian%20Virtual%20UC-kinan%20Assaf-PLACE.pdf" download class="download-btn">📥 Download Certificate</a>
+        </div>
+
+        <div class="footer">
+            &copy; 2026 Kinan Assaf &mdash; All rights reserved.
+        </div>
+    </div>
+</body>
+</html>
